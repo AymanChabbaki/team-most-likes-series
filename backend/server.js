@@ -57,6 +57,17 @@ const connectDB = async () => {
 // Connect to database
 connectDB();
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.status(200).json({
+    status: 'OK',
+    message: '4U FLIX Backend is running',
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV,
+    uptime: process.uptime()
+  });
+});
+
 // Routes
 app.use('/api/catalog', movieRoutes);
 app.use('/api/admin', adminRoutes);
